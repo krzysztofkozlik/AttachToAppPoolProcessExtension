@@ -18,11 +18,11 @@
     <Buttons>
       <Button guid="AttachToAppPoolProcessExtension" id="MyCommand" priority="0x0100" type="Button">
         <Parent guid="AttachToAppPoolProcessExtension" id="MyMenuGroup" />
-        <Icon guid="ImageCatalogGuid" id="StatusInformation" />
+		<Icon guid="ImageCatalogGuid" id="RunTestDialog" />
         <CommandFlag>IconIsMoniker</CommandFlag>
         <Strings>
-          <ButtonText>My Command</ButtonText>
-          <LocCanonicalName>.AttachToAppPoolProcessExtension.MyCommand</LocCanonicalName>
+          <ButtonText>My Test Command 2</ButtonText>
+          <LocCanonicalName>.AttachToAppPoolProcessExtension.MyTestCommand</LocCanonicalName>
         </Strings>
       </Button>
     </Buttons>
