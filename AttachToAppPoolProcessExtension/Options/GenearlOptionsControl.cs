@@ -102,22 +102,22 @@ namespace AttachToAppPoolProcessExtension.Options
 
         private void SaveSettings()
         {
-            var settingsManager = ExtensionManager.ShellSettingsManager;
-            var userSettingsStore = settingsManager.GetWritableSettingsStore(SettingsScope.UserSettings);
-            var processes = new List<AppPoolProcess>();
+            //var settingsManager = ExtensionManager.ShellSettingsManager;
+            //var userSettingsStore = settingsManager.GetWritableSettingsStore(SettingsScope.UserSettings);
+            //var processes = new List<AppPoolProcess>();
 
-            foreach (ListViewItem item in listViewProcesses.Items)
-            {
-                processes.Add(new AppPoolProcess
-                {
-                    Name = item.Text,
-                    AppPoolName = item.SubItems[1].Text
-                });
-            }
+            //foreach (ListViewItem item in listViewProcesses.Items)
+            //{
+            //    processes.Add(new AppPoolProcess
+            //    {
+            //        Name = item.Text,
+            //        AppPoolName = item.SubItems[1].Text
+            //    });
+            //}
 
-            var json = Newtonsoft.Json.JsonConvert.SerializeObject(processes);
+            //var json = Newtonsoft.Json.JsonConvert.SerializeObject(processes);
 
-            userSettingsStore.SetString("AttachToAppPoolProcessExtensionPackage", "Processes", json);
+            //userSettingsStore.SetString("AttachToAppPoolProcessExtensionPackage", "Processes", json);
         }
     }
 
