@@ -3,7 +3,6 @@ global using Microsoft.VisualStudio.Shell;
 global using System;
 global using Task = System.Threading.Tasks.Task;
 using AttachToAppPoolProcessExtension.Options;
-using Microsoft.VisualStudio.Shell.Settings;
 using System.Runtime.InteropServices;
 using System.Threading;
 
@@ -20,13 +19,6 @@ namespace AttachToAppPoolProcessExtension
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
             await this.RegisterCommandsAsync();
-
-            //General.Saved += OnSettingsSaved;
-        }
-
-        private void OnSettingsSaved(General obj)
-        {
-            //obj.Save();
         }
     }
 }

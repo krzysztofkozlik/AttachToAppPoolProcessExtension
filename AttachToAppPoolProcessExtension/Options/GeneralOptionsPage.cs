@@ -1,41 +1,20 @@
-﻿using Microsoft.Internal.VisualStudio.PlatformUI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows;
 
 namespace AttachToAppPoolProcessExtension.Options
 {
-    [Guid("00000000-0000-0000-0000-000000000000")]
+    [Guid("2EB56389-1EA2-4FA6-B7F9-EC81671876C7")]
     [ComVisible(true)]
     public class GeneralOptionsPage : UIElementDialogPage
     {
-        //private string optionValue = "alpha";
         private GeneralOptions pageControl;
         private readonly GeneralOptionsViewModel viewModel = new GeneralOptionsViewModel();
-
-        //public string OptionString
-        //{
-        //    get { return optionValue; }
-        //    set { optionValue = value; }
-        //}
 
         protected override System.Windows.UIElement Child
         {
             get
             {
-                pageControl = new GeneralOptions(viewModel);
-                //{
-                //    generalOptionsPage = this
-                //};
-
-                //model.Processes = General.Instance.MyTextOption;
-
-                //pageControl.Initialize(model);
+                pageControl ??= new GeneralOptions(viewModel);
 
                 return pageControl;
             }
@@ -67,7 +46,6 @@ namespace AttachToAppPoolProcessExtension.Options
 
         public override void SaveSettingsToStorage()
         {
-            //General.Instance.MyOption = (bool)cbMyOption.IsChecked;
             General.Instance.Processes = viewModel.Processes
                 .Select(p => new AppPoolProcess
                 { 
@@ -82,9 +60,4 @@ namespace AttachToAppPoolProcessExtension.Options
             base.SaveSettingsToStorage();
         }
     }
-
-    //public class GeneralOptionsModel
-    //{
-    //    public string Processes { get; set; }
-    //}
 }

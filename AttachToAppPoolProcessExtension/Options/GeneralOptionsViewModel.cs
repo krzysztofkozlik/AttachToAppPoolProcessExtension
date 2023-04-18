@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.PlatformUI;
 using Microsoft.Web.Administration;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -26,7 +25,6 @@ namespace AttachToAppPoolProcessExtension.Options
             {
                 selectedProcess = value;
                 RaisePropertyChanged();
-//                MoveProcessUpCommand.RaiseCanExecuteChanged
             }
         }
 
