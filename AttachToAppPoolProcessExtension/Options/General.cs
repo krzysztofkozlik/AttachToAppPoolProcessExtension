@@ -41,5 +41,17 @@ namespace AttachToAppPoolProcessExtension.Options
         [Description("An informative description.")]
         [DefaultValue("")]
         public string MyTextOption { get; set; } = "";
+
+        [Category("My category")]
+        [DisplayName("My Option")]
+        [Description("An informative description.")]
+        public AppPoolProcess[] Processes { get; set; }
+    }
+
+    public class AppPoolProcess
+    {
+        public bool IsEnabled { get; set; }
+        public string Name { get; set; }
+        public string AppPoolName { get; set; }
     }
 }

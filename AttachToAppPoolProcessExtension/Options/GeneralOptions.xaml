@@ -4,13 +4,45 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AttachToAppPoolProcessExtension.Options"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DataContext="{d:DesignInstance Type=local:GeneralOptionsViewModel}"
+             mc:Ignorable="d">
     <Grid>
-        <CheckBox x:Name="cbMyOption" Content="My Option" HorizontalAlignment="Left"
-                  Margin="30,36,0,0" VerticalAlignment="Top"
-                  IsThreeState="False"
-                  Checked="cbMyOption_Checked" Unchecked="cbMyOption_Unchecked"/>
-        <TextBox x:Name="textbox" HorizontalAlignment="Left" Margin="163,202,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" TextChanged="textbox_TextChanged"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <ListView ItemsSource="{Binding Processes}" SelectionMode="Single" SelectedItem="{Binding SelectedProcess, Mode=TwoWay}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding IsEnabled}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Name">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Stretch" BorderThickness="0" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=AppPoolName}" Header="App Pool" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5, 0">
+            <Button Command="{Binding ImportAppPoolProcessesCommand}" Margin="0, 0, 0, 5">Import</Button>
+            <Button Command="{Binding MoveProcessUpCommand}" Margin="0, 0, 0, 5">Up</Button>
+            <Button Command="{Binding MoveProcessDownCommand}" Margin="0, 0, 0, 5">Down</Button>
+        </StackPanel>
     </Grid>
 </UserControl>

@@ -14,28 +14,28 @@ namespace AttachToAppPoolProcessExtension.Options
     [ComVisible(true)]
     public class GeneralOptionsPage : UIElementDialogPage
     {
-        private string optionValue = "alpha";
+        //private string optionValue = "alpha";
         private GeneralOptions pageControl;
-        private GeneralOptionsModel model = new GeneralOptionsModel();
+        private readonly GeneralOptionsViewModel viewModel = new GeneralOptionsViewModel();
 
-        public string OptionString
-        {
-            get { return optionValue; }
-            set { optionValue = value; }
-        }
+        //public string OptionString
+        //{
+        //    get { return optionValue; }
+        //    set { optionValue = value; }
+        //}
 
         protected override System.Windows.UIElement Child
         {
             get
             {
-                pageControl = new GeneralOptions
-                {
-                    generalOptionsPage = this
-                };
+                pageControl = new GeneralOptions(viewModel);
+                //{
+                //    generalOptionsPage = this
+                //};
 
                 //model.Processes = General.Instance.MyTextOption;
 
-                pageControl.Initialize(model);
+                //pageControl.Initialize(model);
 
                 return pageControl;
             }
@@ -45,29 +45,46 @@ namespace AttachToAppPoolProcessExtension.Options
         {
             base.LoadSettingsFromStorage();
 
-
-            model.Processes = General.Instance.MyTextOption;
-
-            pageControl?.LoadOptions();
+            viewModel.Processes.Clear();
+            
+            foreach (var process in General.Instance.Processes)
+            {
+                viewModel.Processes.Add(new ProcessViewModel
+                {
+                    IsEnabled = process.IsEnabled,
+                    Name = process.Name,
+                    AppPoolName = process.AppPoolName
+                });
+            }
         }
 
         public override void ResetSettings()
         {
             base.ResetSettings();
+
+            viewModel.Processes.Clear();
         }
 
         public override void SaveSettingsToStorage()
         {
             //General.Instance.MyOption = (bool)cbMyOption.IsChecked;
-            General.Instance.MyTextOption = model.Processes;
+            General.Instance.Processes = viewModel.Processes
+                .Select(p => new AppPoolProcess
+                { 
+                    IsEnabled = p.IsEnabled,
+                    Name = p.Name,
+                    AppPoolName = p.AppPoolName
+                })
+                .ToArray();
+
             General.Instance.Save();
 
             base.SaveSettingsToStorage();
         }
     }
 
-    public class GeneralOptionsModel
-    {
-        public string Processes { get; set; }
-    }
+    //public class GeneralOptionsModel
+    //{
+    //    public string Processes { get; set; }
+    //}
 }

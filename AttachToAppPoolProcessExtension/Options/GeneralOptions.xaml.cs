@@ -20,46 +20,48 @@ namespace AttachToAppPoolProcessExtension.Options
     /// </summary>
     public partial class GeneralOptions : UserControl
     {
-        internal GeneralOptionsPage generalOptionsPage;
+        //internal GeneralOptionsPage generalOptionsPage;
 
-        private GeneralOptionsModel model;
+       // private GeneralOptionsModel model;
 
-        public GeneralOptions()
+        public GeneralOptions(GeneralOptionsViewModel viewModel)
         {
             InitializeComponent();
+
+            DataContext = viewModel;
         }
 
-        public void Initialize(GeneralOptionsModel model)
-        {
-            this.model = model;
-            textbox.Text = model.Processes;
+        //public void Initialize(GeneralOptionsModel model)
+        //{
+        //    this.model = model;
+        //    textbox.Text = model.Processes;
 
-            cbMyOption.IsChecked = General.Instance.MyOption;
-            //generalOptionsPage.
-            //General.Instance.Save();
-        }
+        //    cbMyOption.IsChecked = General.Instance.MyOption;
+        //    //generalOptionsPage.
+        //    //General.Instance.Save();
+        //}
 
-        public void LoadOptions()
-        {
-            textbox.Text = model.Processes;
-        }
+        //public void LoadOptions()
+        //{
+        //    textbox.Text = model.Processes;
+        //}
 
-        private void cbMyOption_Checked(object sender, System.Windows.RoutedEventArgs e)
-        {
-            General.Instance.MyOption = (bool)cbMyOption.IsChecked;
-            //General.Instance.Save();
-        }
+        //private void cbMyOption_Checked(object sender, System.Windows.RoutedEventArgs e)
+        //{
+        //    General.Instance.MyOption = (bool)cbMyOption.IsChecked;
+        //    //General.Instance.Save();
+        //}
 
-        private void cbMyOption_Unchecked(object sender, System.Windows.RoutedEventArgs e)
-        {
-            General.Instance.MyOption = (bool)cbMyOption.IsChecked;
-            //General.Instance.Save();
-        }
+        //private void cbMyOption_Unchecked(object sender, System.Windows.RoutedEventArgs e)
+        //{
+        //    General.Instance.MyOption = (bool)cbMyOption.IsChecked;
+        //    //General.Instance.Save();
+        //}
 
-        private void textbox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (model != null)
-                model.Processes = textbox.Text;
-        }
+        //private void textbox_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    if (model != null)
+        //        model.Processes = textbox.Text;
+        //}
     }
 }
