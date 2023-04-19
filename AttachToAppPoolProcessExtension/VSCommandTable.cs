@@ -22,5 +22,8 @@ namespace AttachToAppPoolProcessExtension
     {
         public const int MyMenuGroup = 0x0001;
         public const int MyCommand = 0x0100;
+        public const int Toolbar = 0x2000;
+        public const int ToolbarGroup = 0x2050;
+        public const int ToolbarTestCommandId = 0x3000;
     }
 }

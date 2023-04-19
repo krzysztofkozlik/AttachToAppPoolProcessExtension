@@ -7,9 +7,22 @@
   <Include href="VSGlobals.vsct"/>
 
   <Commands package="AttachToAppPoolProcessExtension">
+    <Menus>
+      <Menu guid="AttachToAppPoolProcessExtension" id="Toolbar" type="Toolbar">
+        <CommandFlag>DefaultDocked</CommandFlag>
+        <Strings>
+          <ButtonText>Test Toolbar</ButtonText>
+          <CommandName>Test Toolbar</CommandName>
+        </Strings>
+      </Menu>
+    </Menus>
+
     <Groups>
       <Group guid="AttachToAppPoolProcessExtension" id="MyMenuGroup" priority="0x0600">
         <Parent guid="VSMainMenu" id="Tools"/>
+      </Group>
+      <Group guid="AttachToAppPoolProcessExtension" id="ToolbarGroup" priority="0x0000">
+        <Parent guid="AttachToAppPoolProcessExtension" id="Toolbar"/>
       </Group>
     </Groups>
 
@@ -18,11 +31,21 @@
     <Buttons>
       <Button guid="AttachToAppPoolProcessExtension" id="MyCommand" priority="0x0100" type="Button">
         <Parent guid="AttachToAppPoolProcessExtension" id="MyMenuGroup" />
-		<Icon guid="ImageCatalogGuid" id="RunTestDialog" />
+        <Icon guid="ImageCatalogGuid" id="RunTestDialog" />
         <CommandFlag>IconIsMoniker</CommandFlag>
         <Strings>
           <ButtonText>My Test Command 2</ButtonText>
           <LocCanonicalName>.AttachToAppPoolProcessExtension.MyTestCommand</LocCanonicalName>
+        </Strings>
+      </Button>
+
+      <Button guid="AttachToAppPoolProcessExtension" id="ToolbarTestCommandId" priority="0x0100" type="Button">
+        <Parent guid= "AttachToAppPoolProcessExtension" id="ToolbarGroup" />
+        <Icon guid="ImageCatalogGuid" id="Settings" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <Strings>
+          <ButtonText>Settings</ButtonText>
+          <LocCanonicalName>.AttachToAppPoolProcessExtension.ToolbarTestCommandId</LocCanonicalName>
         </Strings>
       </Button>
     </Buttons>
@@ -32,6 +55,9 @@
     <GuidSymbol name="AttachToAppPoolProcessExtension" value="{f3886817-e648-4d25-9d91-4ecd660fa3aa}">
       <IDSymbol name="MyMenuGroup" value="0x0001" />
       <IDSymbol name="MyCommand" value="0x0100" />
+      <IDSymbol name="Toolbar" value="0x2000" />
+      <IDSymbol name="ToolbarGroup" value="0x2050" />
+      <IDSymbol name="ToolbarTestCommandId" value="0x3000" />
     </GuidSymbol>
   </Symbols>
 </CommandTable>

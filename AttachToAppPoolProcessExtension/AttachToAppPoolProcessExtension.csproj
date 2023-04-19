@@ -45,6 +45,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Commands\ToolbarTestCommand.cs" />
     <Compile Include="Options\GeneralOptions.xaml.cs">
       <DependentUpon>GeneralOptions.xaml</DependentUpon>
     </Compile>
