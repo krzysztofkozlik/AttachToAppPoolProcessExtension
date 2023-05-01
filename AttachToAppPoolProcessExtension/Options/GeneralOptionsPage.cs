@@ -58,6 +58,21 @@ namespace AttachToAppPoolProcessExtension.Options
             General.Instance.Save();
 
             base.SaveSettingsToStorage();
+
+            RefreshCommands();
+        }
+
+        private void RefreshCommands()
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            var vsShell = ThreadHelper.JoinableTaskFactory.Run(() => VS.Services.GetUIShellAsync());
+
+            if (vsShell != null)
+            {
+                int hr = vsShell.UpdateCommandUI(0);
+                Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(hr);
+            }
         }
     }
 }

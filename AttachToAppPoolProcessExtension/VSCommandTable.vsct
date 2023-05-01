@@ -40,7 +40,7 @@
       </Button>
 
       <Button guid="AttachToAppPoolProcessExtension" id="ToolbarTestCommandId" priority="0x0100" type="Button">
-        <Parent guid= "AttachToAppPoolProcessExtension" id="ToolbarGroup" />
+        <Parent guid="AttachToAppPoolProcessExtension" id="ToolbarGroup" />
         <Icon guid="ImageCatalogGuid" id="Settings" />
         <CommandFlag>IconIsMoniker</CommandFlag>
         <Strings>
@@ -49,6 +49,17 @@
         </Strings>
       </Button>
     </Buttons>
+    
+    <Combos>
+      <Combo guid="AttachToAppPoolProcessExtension" id="ToolbarProcessComboId" defaultWidth="200" idCommandList="ToolbarProcessComboListId" priority="0x102" type="DropDownCombo">
+        <Parent guid="AttachToAppPoolProcessExtension" id="ToolbarGroup" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <ButtonText>Select Insert Options</ButtonText>
+        </Strings>
+      </Combo>
+    </Combos>
+
   </Commands>
 
   <Symbols>
@@ -58,6 +69,8 @@
       <IDSymbol name="Toolbar" value="0x2000" />
       <IDSymbol name="ToolbarGroup" value="0x2050" />
       <IDSymbol name="ToolbarTestCommandId" value="0x3000" />
+      <IDSymbol name="ToolbarProcessComboId" value="0x3001" />
+      <IDSymbol name="ToolbarProcessComboListId" value="0x3002" />
     </GuidSymbol>
   </Symbols>
 </CommandTable>
