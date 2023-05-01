@@ -1,83 +1,47 @@
-﻿using AttachToAppPoolProcessExtension.Options;
-using System.Linq;
+﻿using System.Linq;
 using System.Runtime.InteropServices;
+using AttachToAppPoolProcessExtension.Options;
 
 namespace AttachToAppPoolProcessExtension
 {
     [Command(PackageIds.ToolbarProcessComboId)]
     internal sealed class ToolbarProcessComboCommand : BaseCommand<ToolbarProcessComboCommand>
     {
-        //private string currentDropDownComboChoice = "One";
-        //private string[] dropDownComboChoices = new[] { "One", "Two", "Three" };
-
         protected override async Task ExecuteAsync(OleMenuCmdEventArgs eventArgs)
         {
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-            if (eventArgs == null)
+            IntPtr outValue = eventArgs.OutValue;
+
+            var availableValues = GetAvailableProcesses();
+
+            if (outValue != IntPtr.Zero)
             {
-                // We should never get here; EventArgs are required.
-                throw new ArgumentException("EventArgsRequired"); // force an exception to be thrown
-            }
+                // when outValue is non-NULL, the IDE is requesting the current value for the combo
+                var selectedAppPoolName = GetSelectedAppPoolName();
 
-            string newChoice = eventArgs.InValue as string;
-            IntPtr vOut = eventArgs.OutValue;
-            
-            var dropDownComboChoices = GetAvailableProcesses();
-
-            if (vOut != IntPtr.Zero)
-            {
-                // when vOut is non-NULL, the IDE is requesting the current value for the combo
-                var currentValue = GetCurrentValue();
-
-                var selected = currentValue != null 
-                    ? GetAvailableProcesses().FirstOrDefault(p => p.AppPoolName == currentValue)
+                var selectedProcess = selectedAppPoolName != null 
+                    ? GetAvailableProcesses().FirstOrDefault(p => p.AppPoolName == selectedAppPoolName)
                     : null;
 
-                Marshal.GetNativeVariantForObject(selected?.Name, vOut);
+                Marshal.GetNativeVariantForObject(selectedProcess?.Name, outValue);
             }
-            else if (newChoice != null)
+            else if (eventArgs.InValue is string inValue)
             {
-                // new value was selected or typed in
-                // see if it is one of our items
-                var selected = dropDownComboChoices.FirstOrDefault(p => p.Name == newChoice);
+                var selectedProcess = availableValues.FirstOrDefault(p => p.Name == inValue);
 
-                if (selected != null)
+                if (selectedProcess != null)
                 {
-                    General.Instance.SelectedAppPoolName = selected.AppPoolName;
-                    await General.Instance.SaveAsync();
+                    await SaveSelectedProcessAsync(selectedProcess);
                 }
                 else
                 {
-                    throw (new ArgumentException()); // force an exception to be thrown
+                    await VS.MessageBox.ShowWarningAsync("AttachToAppPoolProcessExtension", $"Cannot find '{inValue}' process");
                 }
-
-                //bool validInput = false;
-                //int indexInput;
-
-
-                //for (indexInput = 0; indexInput < dropDownComboChoices.Length; indexInput++)
-                //{
-                //    if (string.Compare(dropDownComboChoices[indexInput], newChoice, StringComparison.CurrentCultureIgnoreCase) == 0)
-                //    {
-                //        validInput = true;
-                //        break;
-                //    }
-                //}
-
-                //if (validInput)
-                //{
-                //    currentDropDownComboChoice = dropDownComboChoices[indexInput];
-                //    await VS.MessageBox.ShowWarningAsync("AttachToAppPoolProcessExtension", "ToolbarProcessComboCommand " + currentDropDownComboChoice);
-                //}
-                //else
-                //{
-                //    throw (new ArgumentException()); // force an exception to be thrown
-                //}
             }
         }
 
-        private string GetCurrentValue()
+        private string GetSelectedAppPoolName()
         {
             return General.Instance.SelectedAppPoolName;
         }
@@ -87,6 +51,13 @@ namespace AttachToAppPoolProcessExtension
             return General.Instance.Processes
                 .Where(p => p.IsEnabled)
                 .ToArray();
+        }
+
+        private async Task SaveSelectedProcessAsync(AppPoolProcess process)
+        {
+            General.Instance.SelectedAppPoolName = process.AppPoolName;
+
+            await General.Instance.SaveAsync();
         }
     }
 }

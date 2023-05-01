@@ -1,6 +1,6 @@
-﻿using AttachToAppPoolProcessExtension.Options;
-using System.Linq;
+﻿using System.Linq;
 using System.Runtime.InteropServices;
+using AttachToAppPoolProcessExtension.Options;
 
 namespace AttachToAppPoolProcessExtension
 {
@@ -9,27 +9,26 @@ namespace AttachToAppPoolProcessExtension
     {
         protected override void Execute(object sender, EventArgs e)
         {
-            var eventArgs = e as OleMenuCmdEventArgs;
-            if (eventArgs != null)
+            if (e is OleMenuCmdEventArgs eventArgs)
             {
-                // Note: works only for dynamic- and dropdown- combos
                 IntPtr outValue = eventArgs.OutValue;
+
                 if (outValue != IntPtr.Zero)
                 {
                     // when out value is non-NULL, the IDE is requesting the current value for the combo
-                    SetCurrentValue(outValue);
+                    var processesNames = GetAvailableProcessesNames();
+
+                    Marshal.GetNativeVariantForObject(processesNames, outValue);
                 }
             }
         }
 
-        private void SetCurrentValue(IntPtr outValue)
+        private string[] GetAvailableProcessesNames()
         {
-            var processesNames = General.Instance.Processes
+            return General.Instance.Processes
                 .Where(p => p.IsEnabled)
                 .Select(p => p.Name)
                 .ToArray();
-
-            Marshal.GetNativeVariantForObject(processesNames, outValue);
         }
     }
 }
