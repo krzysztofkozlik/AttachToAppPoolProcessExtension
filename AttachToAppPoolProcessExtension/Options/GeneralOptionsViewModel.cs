@@ -17,6 +17,7 @@ namespace AttachToAppPoolProcessExtension.Options
         public ICommand ImportAppPoolProcessesCommand { get; }
         public ICommand MoveProcessUpCommand { get; }
         public ICommand MoveProcessDownCommand { get; }
+        public ICommand SelectProcessCommand { get; }
 
         public ProcessViewModel SelectedProcess 
         { 
@@ -33,6 +34,7 @@ namespace AttachToAppPoolProcessExtension.Options
             ImportAppPoolProcessesCommand = new DispatchedDelegateCommand(ImportAppPoolProcesses);
             MoveProcessUpCommand = new DispatchedDelegateCommand(MoveProcessUp, CanMoveProcessUp);
             MoveProcessDownCommand = new DispatchedDelegateCommand(MoveProcessDown, CanMoveProcessDown);
+            SelectProcessCommand = new DispatchedDelegateCommand(SelectProcess);
         }
 
         private bool CanMoveProcessUp(object obj) => SelectedProcess != null && Processes.IndexOf(SelectedProcess) > 0;
@@ -97,6 +99,14 @@ namespace AttachToAppPoolProcessExtension.Options
 
                     SelectedProcess = process;
                 }
+            }
+        }
+
+        private void SelectProcess(object commandParameter)
+        {
+            if (commandParameter is ProcessViewModel process)
+            {
+                SelectedProcess = process;
             }
         }
 
