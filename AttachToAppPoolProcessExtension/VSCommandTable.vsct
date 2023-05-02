@@ -61,7 +61,7 @@
     </Buttons>
     
     <Combos>
-      <Combo guid="AttachToAppPoolProcessExtension" id="ToolbarProcessComboId" defaultWidth="200" idCommandList="ToolbarProcessComboListId" priority="0x102" type="DropDownCombo">
+      <Combo guid="AttachToAppPoolProcessExtension" id="ToolbarProcessComboId" defaultWidth="150" idCommandList="ToolbarProcessComboListId" priority="0x102" type="DropDownCombo">
         <Parent guid="AttachToAppPoolProcessExtension" id="ToolbarGroup" />
         <CommandFlag>DynamicVisibility</CommandFlag>
         <Strings>

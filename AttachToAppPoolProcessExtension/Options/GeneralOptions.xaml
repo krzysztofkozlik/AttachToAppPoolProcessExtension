@@ -12,8 +12,8 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="100"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
-        <ListView ItemsSource="{Binding Processes}" SelectionMode="Single" SelectedItem="{Binding SelectedProcess, Mode=TwoWay}">
+
+        <ListView ItemsSource="{Binding Processes}" SelectionMode="Single" SelectedItem="{Binding SelectedProcess, Mode=TwoWay}" Binding.TargetUpdated="ListViewTargetUpdated" VirtualizingStackPanel.IsVirtualizing="False">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -43,7 +43,13 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=AppPoolName}" Header="App Pool" />
+                    <GridViewColumn Header="App Pool">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Padding="0,0,10,0" Text="{Binding AppPoolName}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
