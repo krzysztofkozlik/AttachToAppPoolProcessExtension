@@ -48,6 +48,16 @@
           <LocCanonicalName>.AttachToAppPoolProcessExtension.ToolbarTestCommandId</LocCanonicalName>
         </Strings>
       </Button>
+
+      <Button guid="AttachToAppPoolProcessExtension" id="AttachToProcessCommandId" priority="0x0105" type="Button">
+        <Parent guid="AttachToAppPoolProcessExtension" id="ToolbarGroup" />
+        <Icon guid="ImageCatalogGuid" id="Process" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <Strings>
+          <ButtonText>Attach</ButtonText>
+          <LocCanonicalName>.AttachToAppPoolProcessExtension.AttachToProcessCommandId</LocCanonicalName>
+        </Strings>
+      </Button>
     </Buttons>
     
     <Combos>
@@ -71,6 +81,7 @@
       <IDSymbol name="ToolbarTestCommandId" value="0x3000" />
       <IDSymbol name="ToolbarProcessComboId" value="0x3001" />
       <IDSymbol name="ToolbarProcessComboListId" value="0x3002" />
+      <IDSymbol name="AttachToProcessCommandId" value="0x3003" />
     </GuidSymbol>
   </Symbols>
 </CommandTable>

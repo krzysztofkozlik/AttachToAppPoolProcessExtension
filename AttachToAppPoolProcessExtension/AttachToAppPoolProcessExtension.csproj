@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Commands\ToolbarProcessComboCommand.cs" />
     <Compile Include="Commands\ToolbarProcessComboListCommand.cs" />
+    <Compile Include="Commands\AttachToProcessCommand.cs" />
     <Compile Include="Commands\ToolbarTestCommand.cs" />
     <Compile Include="Options\GeneralOptions.xaml.cs">
       <DependentUpon>GeneralOptions.xaml</DependentUpon>
@@ -104,7 +105,9 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Community.VisualStudio.VSCT" Version="16.0.29.6" PrivateAssets="all" />
-    <PackageReference Include="Community.VisualStudio.Toolkit.17" Version="17.0.430" ExcludeAssets="Runtime" />
+    <PackageReference Include="Community.VisualStudio.Toolkit.17" Version="17.0.492" ExcludeAssets="Runtime">
+      <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.0.5232" />
     <PackageReference Include="Microsoft.Web.Administration">
       <Version>11.1.0</Version>

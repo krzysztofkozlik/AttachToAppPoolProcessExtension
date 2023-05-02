@@ -27,5 +27,6 @@ namespace AttachToAppPoolProcessExtension
         public const int ToolbarTestCommandId = 0x3000;
         public const int ToolbarProcessComboId = 0x3001;
         public const int ToolbarProcessComboListId = 0x3002;
+        public const int AttachToProcessCommandId = 0x3003;
     }
 }
