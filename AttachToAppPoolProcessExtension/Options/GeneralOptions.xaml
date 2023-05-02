@@ -13,7 +13,7 @@
             <ColumnDefinition Width="100"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <ListView ItemsSource="{Binding Processes}" SelectionMode="Single" SelectedItem="{Binding SelectedProcess, Mode=TwoWay}" Binding.TargetUpdated="ListViewTargetUpdated" VirtualizingStackPanel.IsVirtualizing="False">
+        <ListView ItemsSource="{Binding Processes}" SelectionMode="Single" SelectedItem="{Binding SelectedProcess, Mode=TwoWay}" VirtualizingStackPanel.IsVirtualizing="False">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
