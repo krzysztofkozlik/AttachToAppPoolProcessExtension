@@ -61,12 +61,17 @@ namespace AttachToAppPoolProcessExtension.Options
             }
             catch (UnauthorizedAccessException)
             {
-                VS.MessageBox.ShowError("AttachToAppPoolProcessExtension", "No permissions to get App Pools from IIS. Try launching VS as administrator.");
+                ShowError("No permissions to get App Pools from IIS. Try launching VS as administrator.");
             }
             catch (Exception ex)
             {
-                VS.MessageBox.ShowError("AttachToAppPoolProcessExtension", $"Unable to get App Pools from IIS: {ex.Message}");
+                ShowError($"Unable to get App Pools from IIS: {ex.Message}");
             }
+        }
+
+        private void ShowError(string message)
+        {
+            VS.MessageBox.ShowError(Resources.ExtensionName, message);
         }
         
         private void AddNewProcesses(List<string> existingAppPoolNames)
@@ -107,7 +112,7 @@ namespace AttachToAppPoolProcessExtension.Options
         {
             if (Processes.Any())
             {
-                var isConfirmed = VS.MessageBox.ShowConfirm("AttachToAppPoolProcessExtension", "Are you sure you want to clear all configured processes?");
+                var isConfirmed = VS.MessageBox.ShowConfirm(Resources.ExtensionName, "Are you sure you want to clear all configured processes?");
 
                 if (isConfirmed)
                 {
@@ -160,7 +165,7 @@ namespace AttachToAppPoolProcessExtension.Options
             }
         }
 
-        public void RaisePropertyChanged([CallerMemberName] string? propertyName = null)
+        public void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
