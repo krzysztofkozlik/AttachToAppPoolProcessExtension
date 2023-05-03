@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.PlatformUI;
 using Microsoft.Web.Administration;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace AttachToAppPoolProcessExtension.Options
         public ICommand ImportAppPoolProcessesCommand { get; }
         public ICommand MoveProcessUpCommand { get; }
         public ICommand MoveProcessDownCommand { get; }
+        public ICommand ClearAppPoolProcessesCommand { get; }
         public ICommand SelectProcessCommand { get; }
 
         public ProcessViewModel SelectedProcess 
@@ -32,6 +34,7 @@ namespace AttachToAppPoolProcessExtension.Options
         public GeneralOptionsViewModel()
         {
             ImportAppPoolProcessesCommand = new DispatchedDelegateCommand(ImportAppPoolProcesses);
+            ClearAppPoolProcessesCommand = new DispatchedDelegateCommand(ClearAppPoolProcesses);
             MoveProcessUpCommand = new DispatchedDelegateCommand(MoveProcessUp, CanMoveProcessUp);
             MoveProcessDownCommand = new DispatchedDelegateCommand(MoveProcessDown, CanMoveProcessDown);
             SelectProcessCommand = new DispatchedDelegateCommand(SelectProcess);
@@ -44,24 +47,71 @@ namespace AttachToAppPoolProcessExtension.Options
 
         private void ImportAppPoolProcesses(object commandParameter)
         {
-            var existingAppPoolNames = Processes.Select(p => p.AppPoolName).ToHashSet();
-
-            using (var serverManager = new ServerManager())
+            try
             {
+                using var serverManager = new ServerManager();
+
                 var appPoolNames = serverManager.WorkerProcesses
                     .Select(p => p.AppPoolName)
-                    .Where(name => !existingAppPoolNames.Contains(name));
+                    .Distinct()
+                    .ToList();
 
-                foreach (var name in appPoolNames)
+                RemoveMissingProcesses(appPoolNames);
+                AddNewProcesses(appPoolNames);
+            }
+            catch (UnauthorizedAccessException)
+            {
+                VS.MessageBox.ShowError("AttachToAppPoolProcessExtension", "No permissions to get App Pools from IIS. Try launching VS as administrator.");
+            }
+            catch (Exception ex)
+            {
+                VS.MessageBox.ShowError("AttachToAppPoolProcessExtension", $"Unable to get App Pools from IIS: {ex.Message}");
+            }
+        }
+        
+        private void AddNewProcesses(List<string> existingAppPoolNames)
+        {
+            var configuredAppPoolNames = Processes
+                .Select(p => p.AppPoolName)
+                .ToHashSet();
+
+            var processesToAdd = existingAppPoolNames
+                .Where(name => !configuredAppPoolNames.Contains(name))
+                .Select(name => new ProcessViewModel
                 {
-                    var process = new ProcessViewModel
-                    {
-                        IsEnabled = true,
-                        Name = name,
-                        AppPoolName = name
-                    };
+                    IsEnabled = true,
+                    Name = name,
+                    AppPoolName = name
+                });
 
-                    Processes.Add(process);
+            foreach (var process in processesToAdd)
+            {
+                Processes.Add(process);
+            }
+        }
+
+        private void RemoveMissingProcesses(List<string> existingAppPoolNames)
+        {
+            var names = existingAppPoolNames.ToHashSet();
+
+            var processesToRemove = Processes
+                .Where(process => !existingAppPoolNames.Contains(process.Name));
+
+            foreach (var process in processesToRemove)
+            {
+                Processes.Remove(process);
+            }
+        }
+
+        private void ClearAppPoolProcesses(object commandParameter)
+        {
+            if (Processes.Any())
+            {
+                var isConfirmed = VS.MessageBox.ShowConfirm("AttachToAppPoolProcessExtension", "Are you sure you want to clear all configured processes?");
+
+                if (isConfirmed)
+                {
+                    Processes.Clear();
                 }
             }
         }

@@ -56,7 +56,9 @@
 
         <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5, 0">
             <Button Command="{Binding ImportAppPoolProcessesCommand}" Margin="0, 0, 0, 5">Import</Button>
-            <Button Command="{Binding MoveProcessUpCommand}" Margin="0, 0, 0, 5">Up</Button>
+            <Button Command="{Binding ClearAppPoolProcessesCommand}" Margin="0, 0, 0, 5">Clear</Button>
+            <Separator />
+            <Button Command="{Binding MoveProcessUpCommand}" Margin="0, 5, 0, 5">Up</Button>
             <Button Command="{Binding MoveProcessDownCommand}" Margin="0, 0, 0, 5">Down</Button>
         </StackPanel>
     </Grid>
