@@ -41,7 +41,7 @@
 
       <Button guid="AttachToAppPoolProcessExtension" id="ToolbarTestCommandId" priority="0x0100" type="Button">
         <Parent guid="AttachToAppPoolProcessExtension" id="ToolbarGroup" />
-        <Icon guid="ImageCatalogGuid" id="Settings" />
+        <Icon guid="ImageCatalogGuid" id="Process" />
         <CommandFlag>IconIsMoniker</CommandFlag>
         <Strings>
           <ButtonText>Settings</ButtonText>
@@ -51,7 +51,7 @@
 
       <Button guid="AttachToAppPoolProcessExtension" id="AttachToProcessCommandId" priority="0x0105" type="Button">
         <Parent guid="AttachToAppPoolProcessExtension" id="ToolbarGroup" />
-        <Icon guid="ImageCatalogGuid" id="Process" />
+        <Icon guid="ImageCatalogGuid" id="StartWebSite" />
         <CommandFlag>IconIsMoniker</CommandFlag>
         <Strings>
           <ButtonText>Attach</ButtonText>
