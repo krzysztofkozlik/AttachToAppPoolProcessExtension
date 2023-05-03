@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System.ComponentModel.Design;
+using System.Linq;
 using System.Runtime.InteropServices;
 using AttachToAppPoolProcessExtension.Options;
+using Microsoft;
 
 namespace AttachToAppPoolProcessExtension
 {
@@ -13,32 +15,53 @@ namespace AttachToAppPoolProcessExtension
 
             IntPtr outValue = eventArgs.OutValue;
 
-            var availableValues = GetAvailableProcesses();
-
             if (outValue != IntPtr.Zero)
             {
-                // when outValue is non-NULL, the IDE is requesting the current value for the combo
-                var selectedAppPoolName = GetSelectedAppPoolName();
-
-                var selectedProcess = selectedAppPoolName != null 
-                    ? GetAvailableProcesses().FirstOrDefault(p => p.AppPoolName == selectedAppPoolName)
-                    : null;
-
-                Marshal.GetNativeVariantForObject(selectedProcess?.Name, outValue);
+                await HandleGetComboValueAsync(outValue);
             }
             else if (eventArgs.InValue is string inValue)
             {
-                var selectedProcess = availableValues.FirstOrDefault(p => p.Name == inValue);
-
-                if (selectedProcess != null)
-                {
-                    await SaveSelectedProcessAsync(selectedProcess);
-                }
-                else
-                {
-                    await VS.MessageBox.ShowWarningAsync("AttachToAppPoolProcessExtension", $"Cannot find '{inValue}' process");
-                }
+                await HandleSetComboValueAsync(inValue);
             }
+        }
+
+        private async Task HandleSetComboValueAsync(string inValue)
+        {
+            var selectedProcess = GetAvailableProcesses().FirstOrDefault(p => p.Name == inValue);
+
+            if (selectedProcess != null)
+            {
+                await SaveSelectedProcessAsync(selectedProcess);
+            }
+            else
+            {
+                await VS.MessageBox.ShowWarningAsync(Resources.ExtensionName, $"Cannot find '{inValue}' process");
+            }
+        }
+
+        private async Task HandleGetComboValueAsync(IntPtr outValue)
+        {
+            var selectedAppPoolName = GetSelectedAppPoolName();
+
+            var selectedProcess = selectedAppPoolName != null
+                ? GetAvailableProcesses().FirstOrDefault(p => p.AppPoolName == selectedAppPoolName)
+                : null;
+
+            await ToggleAttachToProcessCommandAsync(selectedProcess != null);
+
+            Marshal.GetNativeVariantForObject(selectedProcess?.Name, outValue);
+        }
+
+        private async Task ToggleAttachToProcessCommandAsync(bool enabled)
+        {
+            var oleMenuCommandService = await Package.GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
+
+            Assumes.Present(oleMenuCommandService);
+
+            var commandId = new CommandID(PackageGuids.AttachToAppPoolProcessExtension, PackageIds.AttachToProcessCommandId);
+            var command = oleMenuCommandService.FindCommand(commandId);
+
+            command.Enabled = enabled;
         }
 
         private string GetSelectedAppPoolName()
