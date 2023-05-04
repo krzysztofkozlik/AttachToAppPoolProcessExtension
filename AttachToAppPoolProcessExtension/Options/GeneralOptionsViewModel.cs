@@ -100,7 +100,8 @@ namespace AttachToAppPoolProcessExtension.Options
             var names = existingAppPoolNames.ToHashSet();
 
             var processesToRemove = Processes
-                .Where(process => !existingAppPoolNames.Contains(process.Name));
+                .Where(process => !existingAppPoolNames.Contains(process.AppPoolName))
+                .ToList();
 
             foreach (var process in processesToRemove)
             {
