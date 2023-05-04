@@ -2,8 +2,8 @@
 
 namespace AttachToAppPoolProcessExtension
 {
-    [Command(PackageIds.ToolbarTestCommandId)]
-    internal sealed class ToolbarTestCommand : BaseCommand<ToolbarTestCommand>
+    [Command(PackageIds.OpenOptionsCommand)]
+    internal sealed class OpenOptionsCommand : BaseCommand<OpenOptionsCommand>
     {
         protected override async Task ExecuteAsync(OleMenuCmdEventArgs e)
         {

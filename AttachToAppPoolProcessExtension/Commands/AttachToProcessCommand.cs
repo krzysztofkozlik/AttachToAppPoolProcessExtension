@@ -7,7 +7,7 @@ using Microsoft.Web.Administration;
 
 namespace AttachToAppPoolProcessExtension
 {
-    [Command(PackageIds.AttachToProcessCommandId)]
+    [Command(PackageIds.AttachToProcessCommand)]
     internal sealed class AttachToProcessCommand : BaseCommand<AttachToProcessCommand>
     {
         protected override async Task ExecuteAsync(OleMenuCmdEventArgs e)

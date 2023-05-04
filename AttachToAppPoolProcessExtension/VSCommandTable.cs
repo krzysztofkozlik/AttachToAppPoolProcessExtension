@@ -22,9 +22,9 @@ namespace AttachToAppPoolProcessExtension
     {
         public const int Toolbar = 0x2000;
         public const int ToolbarGroup = 0x2050;
-        public const int ToolbarTestCommandId = 0x3000;
-        public const int ToolbarProcessComboId = 0x3001;
-        public const int ToolbarProcessComboListId = 0x3002;
-        public const int AttachToProcessCommandId = 0x3003;
+        public const int OpenOptionsCommand = 0x3000;
+        public const int AppPoolProcessComboCommand = 0x3001;
+        public const int AppPoolProcessComboListCommand = 0x3002;
+        public const int AttachToProcessCommand = 0x3003;
     }
 }

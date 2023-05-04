@@ -6,8 +6,8 @@ using Microsoft;
 
 namespace AttachToAppPoolProcessExtension
 {
-    [Command(PackageIds.ToolbarProcessComboId)]
-    internal sealed class ToolbarProcessComboCommand : BaseCommand<ToolbarProcessComboCommand>
+    [Command(PackageIds.AppPoolProcessComboCommand)]
+    internal sealed class AppPoolProcessComboCommand : BaseCommand<AppPoolProcessComboCommand>
     {
         protected override async Task ExecuteAsync(OleMenuCmdEventArgs eventArgs)
         {
@@ -58,7 +58,7 @@ namespace AttachToAppPoolProcessExtension
 
             Assumes.Present(oleMenuCommandService);
 
-            var commandId = new CommandID(PackageGuids.AttachToAppPoolProcessExtension, PackageIds.AttachToProcessCommandId);
+            var commandId = new CommandID(PackageGuids.AttachToAppPoolProcessExtension, PackageIds.AttachToProcessCommand);
             var command = oleMenuCommandService.FindCommand(commandId);
 
             command.Enabled = enabled;

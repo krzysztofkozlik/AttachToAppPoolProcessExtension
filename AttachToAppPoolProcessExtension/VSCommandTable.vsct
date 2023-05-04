@@ -26,33 +26,34 @@
     <!--This section defines the elements the user can interact with, like a menu command or a button
         or combo box in a toolbar. -->
     <Buttons>
-      <Button guid="AttachToAppPoolProcessExtension" id="ToolbarTestCommandId" priority="0x0100" type="Button">
+      <Button guid="AttachToAppPoolProcessExtension" id="OpenOptionsCommand" priority="0x0100" type="Button">
         <Parent guid="AttachToAppPoolProcessExtension" id="ToolbarGroup" />
         <Icon guid="ImageCatalogGuid" id="Process" />
         <CommandFlag>IconIsMoniker</CommandFlag>
         <Strings>
           <ButtonText>Configuration</ButtonText>
-          <LocCanonicalName>.AttachToAppPoolProcessExtension.ToolbarTestCommandId</LocCanonicalName>
+          <LocCanonicalName>.AttachToAppPoolProcessExtension.OpenOptionsCommand</LocCanonicalName>
         </Strings>
       </Button>
 
-      <Button guid="AttachToAppPoolProcessExtension" id="AttachToProcessCommandId" priority="0x0105" type="Button">
+      <Button guid="AttachToAppPoolProcessExtension" id="AttachToProcessCommand" priority="0x0105" type="Button">
         <Parent guid="AttachToAppPoolProcessExtension" id="ToolbarGroup" />
         <Icon guid="ImageCatalogGuid" id="StartWebSite" />
         <CommandFlag>IconIsMoniker</CommandFlag>
         <Strings>
           <ButtonText>Attach</ButtonText>
-          <LocCanonicalName>.AttachToAppPoolProcessExtension.AttachToProcessCommandId</LocCanonicalName>
+          <LocCanonicalName>.AttachToAppPoolProcessExtension.AttachToProcessCommand</LocCanonicalName>
         </Strings>
       </Button>
     </Buttons>
     
     <Combos>
-      <Combo guid="AttachToAppPoolProcessExtension" id="ToolbarProcessComboId" defaultWidth="150" idCommandList="ToolbarProcessComboListId" priority="0x102" type="DropDownCombo">
+      <Combo guid="AttachToAppPoolProcessExtension" id="AppPoolProcessComboCommand" defaultWidth="150" idCommandList="AppPoolProcessComboListCommand" priority="0x102" type="DropDownCombo">
         <Parent guid="AttachToAppPoolProcessExtension" id="ToolbarGroup" />
         <CommandFlag>DynamicVisibility</CommandFlag>
         <Strings>
           <ButtonText>Select Process</ButtonText>
+          <LocCanonicalName>.AttachToAppPoolProcessExtension.AppPoolProcessComboCommand</LocCanonicalName>
         </Strings>
       </Combo>
     </Combos>
@@ -62,10 +63,10 @@
     <GuidSymbol name="AttachToAppPoolProcessExtension" value="{f3886817-e648-4d25-9d91-4ecd660fa3aa}">
       <IDSymbol name="Toolbar" value="0x2000" />
       <IDSymbol name="ToolbarGroup" value="0x2050" />
-      <IDSymbol name="ToolbarTestCommandId" value="0x3000" />
-      <IDSymbol name="ToolbarProcessComboId" value="0x3001" />
-      <IDSymbol name="ToolbarProcessComboListId" value="0x3002" />
-      <IDSymbol name="AttachToProcessCommandId" value="0x3003" />
+      <IDSymbol name="OpenOptionsCommand" value="0x3000" />
+      <IDSymbol name="AppPoolProcessComboCommand" value="0x3001" />
+      <IDSymbol name="AppPoolProcessComboListCommand" value="0x3002" />
+      <IDSymbol name="AttachToProcessCommand" value="0x3003" />
     </GuidSymbol>
   </Symbols>
 </CommandTable>

@@ -45,10 +45,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Commands\ToolbarProcessComboCommand.cs" />
-    <Compile Include="Commands\ToolbarProcessComboListCommand.cs" />
+    <Compile Include="Commands\AppPoolProcessComboCommand.cs" />
+    <Compile Include="Commands\AppPoolProcessComboListCommand.cs" />
     <Compile Include="Commands\AttachToProcessCommand.cs" />
-    <Compile Include="Commands\ToolbarTestCommand.cs" />
+    <Compile Include="Commands\OpenOptionsCommand.cs" />
     <Compile Include="Options\GeneralOptions.xaml.cs">
       <DependentUpon>GeneralOptions.xaml</DependentUpon>
     </Compile>

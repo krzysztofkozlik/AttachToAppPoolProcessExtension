@@ -5,8 +5,8 @@ using AttachToAppPoolProcessExtension.Options;
 
 namespace AttachToAppPoolProcessExtension
 {
-    [Command(PackageIds.ToolbarProcessComboListId)]
-    internal sealed class ToolbarProcessComboListCommand : BaseCommand<ToolbarProcessComboListCommand>
+    [Command(PackageIds.AppPoolProcessComboListCommand)]
+    internal sealed class AppPoolProcessComboListCommand : BaseCommand<AppPoolProcessComboListCommand>
     {
         protected override void Execute(object sender, EventArgs e)
         {
