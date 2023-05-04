@@ -11,16 +11,13 @@
       <Menu guid="AttachToAppPoolProcessExtension" id="Toolbar" type="Toolbar">
         <CommandFlag>DefaultDocked</CommandFlag>
         <Strings>
-          <ButtonText>Test Toolbar</ButtonText>
-          <CommandName>Test Toolbar</CommandName>
+          <ButtonText>Attach To App Pool Process</ButtonText>
+          <LocCanonicalName>.AttachToAppPoolProcessExtension.Toolbar</LocCanonicalName>
         </Strings>
       </Menu>
     </Menus>
 
     <Groups>
-      <Group guid="AttachToAppPoolProcessExtension" id="MyMenuGroup" priority="0x0600">
-        <Parent guid="VSMainMenu" id="Tools"/>
-      </Group>
       <Group guid="AttachToAppPoolProcessExtension" id="ToolbarGroup" priority="0x0000">
         <Parent guid="AttachToAppPoolProcessExtension" id="Toolbar"/>
       </Group>
@@ -29,22 +26,12 @@
     <!--This section defines the elements the user can interact with, like a menu command or a button
         or combo box in a toolbar. -->
     <Buttons>
-      <Button guid="AttachToAppPoolProcessExtension" id="MyCommand" priority="0x0100" type="Button">
-        <Parent guid="AttachToAppPoolProcessExtension" id="MyMenuGroup" />
-        <Icon guid="ImageCatalogGuid" id="RunTestDialog" />
-        <CommandFlag>IconIsMoniker</CommandFlag>
-        <Strings>
-          <ButtonText>My Test Command 2</ButtonText>
-          <LocCanonicalName>.AttachToAppPoolProcessExtension.MyTestCommand</LocCanonicalName>
-        </Strings>
-      </Button>
-
       <Button guid="AttachToAppPoolProcessExtension" id="ToolbarTestCommandId" priority="0x0100" type="Button">
         <Parent guid="AttachToAppPoolProcessExtension" id="ToolbarGroup" />
         <Icon guid="ImageCatalogGuid" id="Process" />
         <CommandFlag>IconIsMoniker</CommandFlag>
         <Strings>
-          <ButtonText>Settings</ButtonText>
+          <ButtonText>Configuration</ButtonText>
           <LocCanonicalName>.AttachToAppPoolProcessExtension.ToolbarTestCommandId</LocCanonicalName>
         </Strings>
       </Button>
@@ -65,17 +52,14 @@
         <Parent guid="AttachToAppPoolProcessExtension" id="ToolbarGroup" />
         <CommandFlag>DynamicVisibility</CommandFlag>
         <Strings>
-          <ButtonText>Select Insert Options</ButtonText>
+          <ButtonText>Select Process</ButtonText>
         </Strings>
       </Combo>
     </Combos>
-
   </Commands>
 
   <Symbols>
     <GuidSymbol name="AttachToAppPoolProcessExtension" value="{f3886817-e648-4d25-9d91-4ecd660fa3aa}">
-      <IDSymbol name="MyMenuGroup" value="0x0001" />
-      <IDSymbol name="MyCommand" value="0x0100" />
       <IDSymbol name="Toolbar" value="0x2000" />
       <IDSymbol name="ToolbarGroup" value="0x2050" />
       <IDSymbol name="ToolbarTestCommandId" value="0x3000" />
