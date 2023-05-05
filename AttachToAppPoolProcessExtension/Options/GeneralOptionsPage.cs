@@ -25,15 +25,10 @@ namespace AttachToAppPoolProcessExtension.Options
             base.LoadSettingsFromStorage();
 
             viewModel.Processes.Clear();
-            
-            foreach (var process in General.Instance.Processes)
+
+            if (General.Instance.Processes != null)
             {
-                viewModel.Processes.Add(new ProcessViewModel
-                {
-                    IsEnabled = process.IsEnabled,
-                    Name = process.Name,
-                    AppPoolName = process.AppPoolName
-                });
+                ApplyConfiguration();
             }
         }
 
@@ -46,16 +41,7 @@ namespace AttachToAppPoolProcessExtension.Options
 
         public override void SaveSettingsToStorage()
         {
-            General.Instance.Processes = viewModel.Processes
-                .Select(p => new AppPoolProcess
-                { 
-                    IsEnabled = p.IsEnabled,
-                    Name = p.Name,
-                    AppPoolName = p.AppPoolName
-                })
-                .ToArray();
-
-            General.Instance.Save();
+            UpdateConfiguration();
 
             base.SaveSettingsToStorage();
 
@@ -70,9 +56,37 @@ namespace AttachToAppPoolProcessExtension.Options
 
             if (vsShell != null)
             {
-                int hr = vsShell.UpdateCommandUI(0);
-                Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(hr);
+                int hResult = vsShell.UpdateCommandUI(0);
+                Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(hResult);
             }
+        }
+
+
+        private void ApplyConfiguration()
+        {
+            foreach (var process in General.Instance.Processes)
+            {
+                viewModel.Processes.Add(new ProcessViewModel
+                {
+                    IsEnabled = process.IsEnabled,
+                    Name = process.Name,
+                    AppPoolName = process.AppPoolName
+                });
+            }
+        }
+
+        private void UpdateConfiguration()
+        {
+            General.Instance.Processes = viewModel.Processes
+                .Select(p => new AppPoolProcess
+                {
+                    IsEnabled = p.IsEnabled,
+                    Name = p.Name,
+                    AppPoolName = p.AppPoolName
+                })
+                .ToArray();
+
+            General.Instance.Save();
         }
     }
 }

@@ -72,8 +72,8 @@ namespace AttachToAppPoolProcessExtension
         private AppPoolProcess[] GetAvailableProcesses()
         {
             return General.Instance.Processes
-                .Where(p => p.IsEnabled)
-                .ToArray();
+                ?.Where(p => p.IsEnabled)
+                .ToArray() ?? new AppPoolProcess[0];
         }
 
         private async Task SaveSelectedProcessAsync(AppPoolProcess process)

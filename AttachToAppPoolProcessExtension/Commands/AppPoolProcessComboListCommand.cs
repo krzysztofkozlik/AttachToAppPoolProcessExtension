@@ -26,9 +26,9 @@ namespace AttachToAppPoolProcessExtension
         private string[] GetAvailableProcessesNames()
         {
             return General.Instance.Processes
-                .Where(p => p.IsEnabled)
+                ?.Where(p => p.IsEnabled)
                 .Select(p => p.Name)
-                .ToArray();
+                .ToArray() ?? new string[0];
         }
     }
 }
