@@ -82,7 +82,8 @@
       <Generator>VsixManifestGenerator</Generator>
       <LastGenOutput>source.extension.cs</LastGenOutput>
     </None>
-    <Content Include="LICENSE.txt">
+    <Content Include="..\LICENSE.txt">
+      <Link>Resources\LICENSE.txt</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>

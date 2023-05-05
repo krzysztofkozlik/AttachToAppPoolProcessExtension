@@ -5,7 +5,7 @@
         <DisplayName>Attach To App Pool Process Toolbar</DisplayName>
         <Description xml:space="preserve">Toolbar providing an easy way to attach to predefined IIS processes based on the name of the associated App Pool.</Description>
         <MoreInfo>https://github.com/Achmemrun/AttachToAppPoolProcessExtension</MoreInfo>
-        <License>LICENSE.txt</License>
+        <License>Resources\LICENSE.txt</License>
         <Icon>Resources\Icon.png</Icon>
         <PreviewImage>Resources\Icon.png</PreviewImage>
         <Tags>Attach, Attach to process, Attach toolbar, Debug, Debugger, Debugging, Menus and Toolbars, IIS, App Pool</Tags>
