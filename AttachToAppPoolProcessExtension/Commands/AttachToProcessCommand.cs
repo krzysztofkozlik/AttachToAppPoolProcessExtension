@@ -14,7 +14,7 @@ namespace AttachToAppPoolProcessExtension
         {
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-            var selectedAppPool = General.Instance.SelectedAppPoolName;
+            var selectedAppPool = GeneralOptions.Instance.SelectedAppPoolName;
 
             if (selectedAppPool == null)
             {

@@ -49,13 +49,14 @@
     <Compile Include="Commands\AppPoolProcessComboListCommand.cs" />
     <Compile Include="Commands\AttachToProcessCommand.cs" />
     <Compile Include="Commands\OpenOptionsCommand.cs" />
-    <Compile Include="Options\GeneralOptions.xaml.cs">
-      <DependentUpon>GeneralOptions.xaml</DependentUpon>
+    <Compile Include="Options\AppPoolProcess.cs" />
+    <Compile Include="Options\GeneralOptionsControl.xaml.cs">
+      <DependentUpon>GeneralOptionsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Options\GeneralOptionsPage.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Options\General.cs" />
+    <Compile Include="Options\GeneralOptions.cs" />
     <Compile Include="Options\GeneralOptionsViewModel.cs" />
     <Compile Include="Options\ProcessViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -126,7 +127,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Options\GeneralOptions.xaml">
+    <Page Include="Options\GeneralOptionsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

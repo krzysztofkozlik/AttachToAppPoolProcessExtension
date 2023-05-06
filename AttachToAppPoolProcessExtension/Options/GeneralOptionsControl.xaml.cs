@@ -7,9 +7,9 @@ namespace AttachToAppPoolProcessExtension.Options
     /// <summary>
     /// Interaction logic for GeneralOptions.xaml
     /// </summary>
-    public partial class GeneralOptions : UserControl
+    public partial class GeneralOptionsControl : UserControl
     {
-        public GeneralOptions(GeneralOptionsViewModel viewModel)
+        public GeneralOptionsControl(GeneralOptionsViewModel viewModel)
         {
             InitializeComponent();
 

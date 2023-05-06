@@ -2,7 +2,7 @@
 
 namespace AttachToAppPoolProcessExtension.Options
 {
-    public class General : BaseOptionModel<General>
+    public class GeneralOptions : BaseOptionModel<GeneralOptions>
     {
         [Category("General")]
         [DisplayName("Available processes")]
@@ -13,12 +13,5 @@ namespace AttachToAppPoolProcessExtension.Options
         [DisplayName("Selected App Pool")]
         [Description("An informative description.")]
         public string SelectedAppPoolName { get; set;  }
-    }
-
-    public class AppPoolProcess
-    {
-        public bool IsEnabled { get; set; }
-        public string Name { get; set; }
-        public string AppPoolName { get; set; }
     }
 }

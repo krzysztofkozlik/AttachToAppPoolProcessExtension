@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Design;
-using System.Linq;
+﻿using System.Linq;
 using System.Runtime.InteropServices;
 using AttachToAppPoolProcessExtension.Options;
 
@@ -25,7 +24,7 @@ namespace AttachToAppPoolProcessExtension
 
         private string[] GetAvailableProcessesNames()
         {
-            return General.Instance.Processes
+            return GeneralOptions.Instance.Processes
                 ?.Where(p => p.IsEnabled)
                 .Select(p => p.Name)
                 .ToArray() ?? new string[0];

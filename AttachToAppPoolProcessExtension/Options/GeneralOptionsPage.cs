@@ -7,14 +7,14 @@ namespace AttachToAppPoolProcessExtension.Options
     [ComVisible(true)]
     public class GeneralOptionsPage : UIElementDialogPage
     {
-        private GeneralOptions pageControl;
+        private GeneralOptionsControl pageControl;
         private readonly GeneralOptionsViewModel viewModel = new GeneralOptionsViewModel();
 
         protected override System.Windows.UIElement Child
         {
             get
             {
-                pageControl ??= new GeneralOptions(viewModel);
+                pageControl ??= new GeneralOptionsControl(viewModel);
 
                 return pageControl;
             }
@@ -26,7 +26,7 @@ namespace AttachToAppPoolProcessExtension.Options
 
             viewModel.Processes.Clear();
 
-            if (General.Instance.Processes != null)
+            if (GeneralOptions.Instance.Processes != null)
             {
                 ApplyConfiguration();
             }
@@ -64,7 +64,7 @@ namespace AttachToAppPoolProcessExtension.Options
 
         private void ApplyConfiguration()
         {
-            foreach (var process in General.Instance.Processes)
+            foreach (var process in GeneralOptions.Instance.Processes)
             {
                 viewModel.Processes.Add(new ProcessViewModel
                 {
@@ -77,7 +77,7 @@ namespace AttachToAppPoolProcessExtension.Options
 
         private void UpdateConfiguration()
         {
-            General.Instance.Processes = viewModel.Processes
+            GeneralOptions.Instance.Processes = viewModel.Processes
                 .Select(p => new AppPoolProcess
                 {
                     IsEnabled = p.IsEnabled,
@@ -86,7 +86,7 @@ namespace AttachToAppPoolProcessExtension.Options
                 })
                 .ToArray();
 
-            General.Instance.Save();
+            GeneralOptions.Instance.Save();
         }
     }
 }

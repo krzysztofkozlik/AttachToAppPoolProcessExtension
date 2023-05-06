@@ -66,21 +66,21 @@ namespace AttachToAppPoolProcessExtension
 
         private string GetSelectedAppPoolName()
         {
-            return General.Instance.SelectedAppPoolName;
+            return GeneralOptions.Instance.SelectedAppPoolName;
         }
 
         private AppPoolProcess[] GetAvailableProcesses()
         {
-            return General.Instance.Processes
+            return GeneralOptions.Instance.Processes
                 ?.Where(p => p.IsEnabled)
                 .ToArray() ?? new AppPoolProcess[0];
         }
 
         private async Task SaveSelectedProcessAsync(AppPoolProcess process)
         {
-            General.Instance.SelectedAppPoolName = process.AppPoolName;
+            GeneralOptions.Instance.SelectedAppPoolName = process.AppPoolName;
 
-            await General.Instance.SaveAsync();
+            await GeneralOptions.Instance.SaveAsync();
         }
     }
 }
