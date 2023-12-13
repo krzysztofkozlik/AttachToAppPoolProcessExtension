@@ -42,10 +42,7 @@ namespace AttachToAppPoolProcessExtension
                 return;
             }
 
-            Transport transport = debugger.Transports.Item("default");
-            Engine[] engines = { transport.Engines.Item("Managed") };
-
-            process.Attach2(engines);
+            process.Attach();
 
             ShowStatusMessage($"Attached to {process.Name} [{process.ProcessID}]");
         }
